@@ -1,0 +1,82 @@
+﻿@model IEnumerable<LibraryManagement.Models.Student>
+
+<div class="d-flex align-items-center">
+    <div class="search-container">
+        <a class="btn btn-primary" href="@Url.Action("Create", "Student")">Create</a> <!-- Sử dụng href với Url.Action để chuyển đến trang tạo sinh viên -->
+    </div>
+    <div class="form-group ml-3">
+        <form method="get" action="@Url.Action("Index", "Student")">
+            <input type="text" class="form-control search-input" name="searchString" placeholder="Tìm kiếm sinh viên...">
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead class="table-light">
+        <tr>
+            <th>STT</th>
+            <th>MSSV</th>
+            <th>Tên Sinh Viên</th>
+            <th>Lớp</th>
+            <th>Điện Thoại</th>
+            <th>Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int index = 1;
+            foreach (var student in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@student.Mssv</td> <!-- Hiển thị MSSV -->
+                    <td>@student.StudentName</td> <!-- Hiển thị tên sinh viên -->
+                    <td>@student.Class</td> <!-- Hiển thị lớp -->
+                    <td>@student.Phone</td> <!-- Hiển thị số điện thoại -->
+                    <td>            
+                        <a href="@Url.Action("Edit", "Student", new { id = student.StudentID })" class="btn btn-warning">Sửa</a>
+                        <a href="@Url.Action("Delete", "Student", new { id = student.StudentID })" class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6">Không có sinh viên nào được tìm thấy.</td>
+            </tr>
+        }
+
+        <style>
+            /* Đóng khung toàn bộ bảng */
+            .table {
+                border-collapse: collapse; /* Gộp viền */
+                width: 100%; /* Chiều rộng 100% */
+            }
+
+                .table th, .table td {
+                    border: 1px solid #dee2e6; /* Viền cho từng ô */
+                    text-align: center; /* Căn giữa nội dung */
+                }
+
+            /* Ẩn viền dọc cho tất cả các hàng */
+            tbody tr td {
+                border-right: none; /* Ẩn gạch dọc bên phải */
+            }
+
+                /* Đặt viền dọc cho ô cuối cùng trong hàng */
+                tbody tr td:last-child {
+                    border-right: 1px solid #dee2e6; /* Gạch dọc cho ô cuối cùng */
+                }
+
+            /* Thêm viền dưới cho các hàng */
+            tbody tr {
+                border-bottom: 1px solid #dee2e6; /* Gạch ngang cho mỗi hàng */
+            }
+        </style>
+
+    </tbody>
+</table>
+

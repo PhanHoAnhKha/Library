@@ -1,0 +1,93 @@
+﻿@model IEnumerable<LibraryManagement.Models.Book>
+
+<div class="d-flex align-items-center">
+    <div class="search-container">
+        <a class="btn btn-primary" href="#">Create</a> <!-- Đặt href nếu không sử dụng asp-action -->
+    </div>
+    <div class="form-group ml-3">
+        <form method="get" action="#">
+            <input type="text" class="form-control search-input" name="searchString" placeholder="Tìm kiếm công việc...">
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead class="table-light">
+        <tr>
+            <th>STT</th>
+            <th>Hình Ảnh</th>
+            <th>Tên Sách</th>
+            <th>Thể Loại</th>
+            <th>Tác Giả</th>
+            <th>Số Lượng</th>
+            <th>Thao Tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            int index = 1;
+            foreach (var book in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(book.ImageUrl))
+                        {
+                            <img src="@book.ImageUrl" style="width: 70px; height: 100px;" />
+                        }
+                        else
+                        {
+                            <p>Không có ảnh</p>
+                        }
+                    </td>
+                    <td>@book.NameBook</td>
+                    <td>@book.Category?.CategoryName</td> <!-- Hiển thị tên thể loại -->
+                    <td>@book.Author</td>
+                    <td>@book.Quantity</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Book", new { id = book.BookID })" class="btn btn-info">Xem</a>
+                        <a href="@Url.Action("Edit", "Book", new { id = book.BookID })" class="btn btn-warning">Sửa</a>
+                        <a href="@Url.Action("Delete", "Book", new { id = book.BookID })" class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7">Không có sách nào được tìm thấy.</td>
+            </tr>
+        }
+
+        <style>
+            /* Đóng khung toàn bộ bảng */
+            .table {
+                border-collapse: collapse; /* Gộp viền */
+                width: 100%; /* Chiều rộng 100% */
+            }
+
+                .table th, .table td {
+                    border: 1px solid #dee2e6; /* Viền cho từng ô */
+                    text-align: center; /* Căn giữa nội dung */
+                }
+
+            /* Ẩn viền dọc cho tất cả các hàng */
+            tbody tr td {
+                border-right: none; /* Ẩn gạch dọc bên phải */
+            }
+
+                /* Đặt viền dọc cho ô cuối cùng trong hàng */
+                tbody tr td:last-child {
+                    border-right: 1px solid #dee2e6; /* Gạch dọc cho ô cuối cùng */
+                }
+
+            /* Thêm viền dưới cho các hàng */
+            tbody tr {
+                border-bottom: 1px solid #dee2e6; /* Gạch ngang cho mỗi hàng */
+            }
+        </style>
+
+    </tbody>
+</table>

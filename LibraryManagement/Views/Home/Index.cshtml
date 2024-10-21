@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Chào mừng đến với Hệ thống quản lý Thư viện</h1>
+    <p class="lead">Khám phá cách quản lý sách, sinh viên và lịch sử mượn trả dễ dàng và hiệu quả.</p>
+
+    <!-- Thêm hình ảnh lớn cho phần mở màn -->
+    <div class="home-image-container">
+        <img src="~/images/library-banner.jpg" alt="Thư viện lớn" class="img-fluid home-banner">
+    </div>
+
+    <p class="mt-4">Tìm hiểu về <a href="https://learn.microsoft.com/aspnet/core">xây dựng Web app với ASP.NET Core</a>.</p>
+</div>
+
+<!-- CSS để định dạng và căn chỉnh hình ảnh cho đẹp mắt -->
+<style>
+    .home-image-container {
+        margin: 20px auto;
+        max-width: 1000px; /* Đặt chiều rộng tối đa cho hình ảnh */
+    }
+
+    .home-banner {
+        width: 100%; /* Hình ảnh sẽ chiếm toàn bộ chiều rộng của khung chứa */
+        height: auto; /* Chiều cao tự động thay đổi theo tỉ lệ hình ảnh */
+        border-radius: 10px; /* Tạo góc bo tròn cho hình ảnh */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Tạo hiệu ứng đổ bóng cho hình ảnh */
+    }
+</style>
